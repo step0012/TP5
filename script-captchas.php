@@ -1,16 +1,18 @@
 <?php
+session_start();
+
 
 /****************************************************************
 * CAPTCHA GENERATEUR IMAGE EN PHP
-* /!\ PAS DE RETOUR D'ERREUR SUR LA GÉNÉRATION
-* SCRIPT ALLEGÉ SANS OPTIMISATION POUR LA COMPRÉHENSION
+* /!\ PAS DE RETOUR D'ERREUR SUR LA Gï¿½Nï¿½RATION
+* SCRIPT ALLEGï¿½ SANS OPTIMISATION POUR LA COMPRï¿½HENSION
 *****************************************************************/
 
 /****************************************************************
 * 1. PARAMETRAGE DES ATTRIBUTS VARIABLES
 *****************************************************************/
-/* CHAINE DE CARACTÈRE PARAMÈTRABLE
-* SUPPRESSION DE 1 & I POUR ÉVITER LA CONFUSION DE LECTURE */
+/* CHAINE DE CARACTï¿½RE PARAMï¿½TRABLE
+* SUPPRESSION DE 1 & I POUR ï¿½VITER LA CONFUSION DE LECTURE */
 $chaine = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 
 /* CREATION de l'image par defaut en background */
@@ -42,7 +44,7 @@ function getCode($length, $chars) {
 
 /* APPEL DE LA FONCTION POUR RECUPERER UNE CHAINE ALEATOIRE */
 $code = getCode(5, $chaine);
-
+$_SESSION['code'] = $code;
 /* RETOURNE UN A UN LES SEGMENTS DE LA CHAINE */
 $char1 = substr($code,0,1);
 $char2 = substr($code,1,1);
@@ -65,10 +67,10 @@ imagettftext($image, 28, -15, 120, 37, $color, $font, $char5);
 /* ENTETE HTTP A RENVOYER POUR LA GENERATION DE L'iMAGE */
 header('Content-Type: image/png');
 
-/* ENVOI DE L'IMAGE PNG GENERÉE AU NAVIGATEUR */
+/* ENVOI DE L'IMAGE PNG GENERï¿½E AU NAVIGATEUR */
 imagepng($image);
 
-/* DESTRUCTION DE L'IMAGE LIBÉRATION DE MÉMOIRE */
+/* DESTRUCTION DE L'IMAGE LIBï¿½RATION DE Mï¿½MOIRE */
 imagedestroy($image);
 
 ?>
